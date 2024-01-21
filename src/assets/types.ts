@@ -1,0 +1,16 @@
+export enum IconsType {
+  logo = "logo",
+  home = "home",
+  message = "message",
+  settings = "settings",
+  folder = "folder",
+  avatar = "avatar",
+  close = "close",
+  rightArrow = "rightArrow",
+  search = "search",
+  chevronDown = "chevronDown",
+  chevronUp = "chevronUp",
+  back = "back",
+  tick = "tick",
+  people = "people",
+}
