@@ -52,7 +52,10 @@ const UploadedDocuments = ({
                   {document}
                 </Typography>
               </span>
-              <div onClick={handleDeleteDocument(document)}>
+              <div
+                className="cursor-pointer border border-solid border-borderPrimary p-1 rounded"
+                onClick={handleDeleteDocument(document)}
+              >
                 {getIcons(IconsType.close)}
               </div>
             </div>
