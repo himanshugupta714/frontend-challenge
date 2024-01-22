@@ -4,7 +4,7 @@ import Input from "components/input";
 import Typography from "components/typography";
 import EmptyContainer from "../emptyContainer";
 import { getIcons } from "assets";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 
 interface UploadedDocumentsProps {
   selectedDocument: string[];
@@ -15,6 +15,8 @@ const UploadedDocuments = ({
   selectedDocument,
   setSelectedDocument,
 }: UploadedDocumentsProps) => {
+  const [search, setSearch] = useState<string>("");
+
   const handleDeleteDocument = useCallback(
     (document: string) => () => {
       setSelectedDocument &&
@@ -23,18 +25,26 @@ const UploadedDocuments = ({
     [setSelectedDocument]
   );
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearch(e.target.value);
+  };
+
+  const filteredDocument = selectedDocument.filter((document) =>
+    document.toLowerCase().includes(search.toLowerCase())
+  );
+
   return (
     <Card className="flex-1 min-h-[60vh]">
       <Typography variant="base" weight="medium" className="mb-3">
         Selected Documents
       </Typography>
-      <Input icon={IconsType.search} />
+      <Input onChange={handleChange} icon={IconsType.search} />
 
       {selectedDocument.length === 0 && <EmptyContainer />}
 
       {selectedDocument.length > 0 && (
         <div className="flex flex-col gap-4 mt-4 border border-solid border-green-500 rounded-lg p-2">
-          {selectedDocument.map((document) => (
+          {filteredDocument.map((document) => (
             <div key={document} className="flex items-center justify-between">
               <span className="flex items-center gap-2">
                 {getIcons(IconsType.tick)}
